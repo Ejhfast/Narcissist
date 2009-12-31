@@ -1,0 +1,21 @@
+%h2 
+	The Requested User is 
+	%span{:style => "font-size:1.5em;font-style:italic;text-decoration:underline"} 
+		%italic #{message}
+%ul
+	%li
+		%a{:href => "http://twitter.com/#{user}"}
+			%span{:style => "color:darkred"} #{user}
+		\: #{number}
+	%li
+		#{user} / average : #{number / average}
+%h2 The Average
+%p
+	= average
+%h2 Random Selection of Others
+%ul
+	- sample.keys.each do |u|
+		%li
+			%a{:href => "http://twitter.com/#{u}"}
+				%span{:style => "color:darkred"} #{u}
+			\: #{sample[u]}

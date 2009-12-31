@@ -1,0 +1,18 @@
+!!! Strict
+%html{:xmlns => "http://www.w3.org/1999/xhtml", :lang => "en"}
+	%head
+		%title Narcissist
+		%link{:rel => "stylesheet", :type => "text/css", :href => "/style.css", :media => "screen"}	
+	%body
+		#headblock 
+			%h1 Narcissist Quotient
+		#main
+			#{yield}
+		#sidebar
+			%p Although tweeting may be good for the soul.
+			%br
+			%p Self-importance is a matter for self-reflection.
+			%br
+			%p 
+				%strong Narcissist Quotient = 
+				%span{:style => "font-style:italic"} Mentions of Self / Recent Tweets		
