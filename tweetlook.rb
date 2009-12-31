@@ -4,10 +4,13 @@ require 'pp'
 
 
 def user_look(user)
+  arr = File.new('password').to_a
+  the_user = arr[0]
+  the_pass = arr[1]
   narcs = ['me', 'my', 'I', "I'm", "I'll", "mine"]
   narcs_hash = Hash.new(0)
   total = 0
-  client = Twitter::Client.new(:login => 'user', :password => 'password')
+  client = Twitter::Client.new(:login => the_user, :password => the_pass)
   res = client.timeline_for(:user, :id => user, :count => 50).map {|x| x.text}
   if res == nil
     raise Error
