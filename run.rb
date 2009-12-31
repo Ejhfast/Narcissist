@@ -1,24 +1,35 @@
 require 'rubygems'
 require 'sinatra'
-require 'twitter'
 require 'tweetlook.rb'
 
+get '/' do
+  haml :landing
+end
+
+get '/mentions-of-self' do
+  haml :mentions
+end
+
 get '/:user' do
-  score = user_look( params[:user] )
-  others = random_users()
-  average = average_score(others)
-  ratio = score / average
-  if ratio < 1
-    message = "Quite Modest"
-  elsif ratio == 1
-    message = "Rather Average"
-  elsif ratio > 1 and ratio < 2
-    message = "Self-Important"
-  else
-    message = "a Raging Ego"
+  failed = false
+  begin
+    score = user_look( params[:user] )
+    others = random_users()
+    average = 0.355947523810431 # hard coded from previous data collection
+    ratio = score / average
+  rescue
+    failed = true
   end
-  if Twitter.user( params[:user] ).error == nil
-    puts 'hello'
+  if failed != true
+    if ratio < 1
+      message = "Quite Modest"
+    elsif ratio == 1
+      message = "Rather Average"
+    elsif ratio > 1 and ratio < 2
+      message = "Self-Important"
+    else
+      message = "a Raging Ego"
+    end
     haml :index, :locals => {
                             :user => params[:user], :number => score, 
                             :sample => others, :average => average, :message => message }
@@ -26,3 +37,4 @@ get '/:user' do
     haml :no_exist
   end
 end
+

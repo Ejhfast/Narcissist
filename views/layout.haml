@@ -1,24 +1,27 @@
 !!! Strict
 %html{:xmlns => "http://www.w3.org/1999/xhtml", :lang => "en"}
 	%head
-		%title Narcissist
+		%title Narcissist Quotient
 		%link{:rel => "stylesheet", :type => "text/css", :href => "/style.css", :media => "screen"}	
 	%body
 		#headblock 
-			%h1 Narcissist Quotient
+			%h1 
+				%a{:href => "/", :style => "color:black"} Narcissist Quotient
 		#main
 			#{yield}
 		#sidebar
 			%p 
 				%strong Narcissist Quotient = 
-				%span{:style => "font-style:italic"} Mentions of Self / Recent Tweets
+				%span{:style => "font-style:italic"} 
+					%a{:href => "/mentions-of-self"} Mentions of Self 
+					\/ Recent Tweets
 			%br
 			%p Although tweeting may be good for the soul...
 			%br
 			%p Self-importance is a matter for self-reflection.
 			%br
 			%p 
-				All this is to say that you should follow me,
+				You might consider following me,
 				%a{:href => "http://twitter.com/unignorant"} UnIgnorant,
-				for my hypocrisy is clothed in that rather fine wool of self-deprecation.
+				for my apparent hypocrisy is clothed in the fine wool of self-deprecation.
 					
