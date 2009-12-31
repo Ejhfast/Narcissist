@@ -1,6 +1,6 @@
 gem('twitter4r', '>=0.2.0')
 require('twitter')
-require 'pp'
+require('pp')
 
 
 def user_look(user)
@@ -16,24 +16,16 @@ def user_look(user)
     raise Error
   end
   res.each do |r|
-  	#puts r + "\n\n"
-  	(0..r.size).each do |idx|
-  		narcs.each do |n|
-  			if(r[idx..idx+n.size-1] == n)
-  			  if r[idx+n.size] == ' '
-  				  narcs_hash[n] = narcs_hash[n] + 1
-				  end
-  			end
-  		end
-  	end
+    words = r.split(' ')
+    narcs.each do |n|
+      num = words.select{|x| x == n}.size
+      narcs_hash[n] = narcs_hash[n] + num
+    end
   end
   narcs_hash.keys.each do |key|
 	  total = total + narcs_hash[key]
-	  #puts "#{key}: #{narcs_hash[key]}"
   end
   tweet_to_self = total.to_f / res.size.to_f
-  #puts "Tweet to Self Ratio: #{tweet_to_self}"
-  tweet_to_self
 end
 
 def random_users()
