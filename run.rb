@@ -3,10 +3,6 @@ require 'sinatra'
 require 'twitter'
 require 'tweetlook.rb'
 
-template :no_exist do
-  '%h2 Alas, the queried user does not exist.'
-end
-
 get '/:user' do
   score = user_look( params[:user] )
   others = random_users()
