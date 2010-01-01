@@ -58,11 +58,9 @@ a:hover {
 	letter-spacing: -1px;
 }
 
-#main p {
-  margin: 20px 0;
-  
+#main h5 {
+  margin: 20px 0px;
   font-size: 15px;
-  
   line-height: 20px;
 }
 
