@@ -29,8 +29,11 @@ def user_look(user)
 end
 
 def random_users()
+  arr = File.new('password').to_a
+  the_user = arr[0]
+  the_pass = arr[1]
   user_hash = Hash.new(0)
-  client = Twitter::Client.new(:login => 'NarcTweet1', :password => 'mypass1')
+  client = Twitter::Client.new(:login => the_user, :password => the_pass)
   users = client.timeline_for(:public).map {|x| x.user.screen_name}
   users[0..2].each do |u|
   	user_hash[u] = user_look(u)
