@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'sequel'
 
 DB = Sequel.connect('sqlite://twitterers.db')
