@@ -1,6 +1,18 @@
 require 'rubygems'
 require 'sinatra'
 require 'tweetlook.rb'
+require 'sqlwrap.rb'
+
+conditional_up()
+
+def random_users_db(tweeters)
+	others = tweeters.sort_by{|x| rand(100)}.first(3)
+	hash = Hash.new(0)
+	others.each do |person|
+		hash[person[:user]] = person[:narcQuo]
+	end
+	hash	
+end
 
 get '/' do
   haml :landing
@@ -11,10 +23,18 @@ get '/mentions-of-self' do
 end
 
 get '/:user' do
+  tweeters = DB[:tweeters]
   failed = false
   begin
-    score = user_look( params[:user] )
-    others = random_users()
+	req = tweeters.filter(:user => params[:user]).first
+	if req != nil and req[:created_at] >= Time.now - 3600
+		score = req[:narcQuo]
+	else
+    	score = user_look( params[:user] )
+		tweeters.insert(:user => params[:user], :narcQuo => score, 
+						:created_at => Time.now)
+    end
+	others = random_users_db(tweeters)
     average = 0.355947523810431 # hard coded from previous data collection
     ratio = score / average
   rescue
