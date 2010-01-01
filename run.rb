@@ -26,7 +26,7 @@ get '/:user' do
   tweeters = DB[:tweeters]
   failed = false
   begin
-	req = tweeters.filter(:user => params[:user]).first
+	req = tweeters.filter(:user => params[:user]).order(:created_at).last
 	if req != nil and req[:created_at] >= Time.now - 3600
 		score = req[:narcQuo]
 	else
