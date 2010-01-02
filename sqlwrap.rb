@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sequel'
-require 'sqlite3'
 
 DB = Sequel.connect('sqlite://twitterers.db')
 
